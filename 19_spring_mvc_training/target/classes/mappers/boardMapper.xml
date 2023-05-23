@@ -4,5 +4,27 @@
 	
 <mapper namespace="boardMapper">
 
+	<insert id="insertBoard" parameterType="BoardDTO">
+		INSERT INTO BOARD (
+			PASSWD,
+			WRITER,
+			SUBJECT,
+			CONTENT
+		)
+		VALUES (
+			#{passwd},
+			#{writer},
+			#{subject},
+			#{content}
+		)
+	</insert>
+	
+	<select id="selectListBoard" resultType="BoardDTO">
+		SELECT
+				*
+		FROM
+				BOARD
+	</select>
+
 
 </mapper>
