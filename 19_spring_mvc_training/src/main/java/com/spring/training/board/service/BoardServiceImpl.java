@@ -68,5 +68,53 @@ public class BoardServiceImpl implements BoardService {
 		return boardList;
 	}
 
-	
+	@Override
+	public BoardDTO getBoardDetail(long boardId, boolean isUpdateReadCnt) {
+		
+		if (isUpdateReadCnt) {
+			boardDAO.updateReadCnt(boardId);
+		} 
+		
+		return boardDAO.selectOneBoard(boardId);
+		
+	}
+
+	@Override
+	public boolean modifyBoard(BoardDTO boardDTO) {
+		
+		boolean isUpdate = false;
+		
+		if (bCryptPasswordEncoder.matches(boardDTO.getPasswd(), boardDAO.selectOnePasswd(boardDTO.getBoardId()))) {
+			boardDAO.updateBoard(boardDTO);
+			isUpdate = true;
+		} 
+		
+		return isUpdate;
+	}
+
+	@Override
+	public boolean removeBoard(BoardDTO boardDTO) {
+		
+		boolean isDelete = false;
+		
+		/*
+		 * String encidedPassword = BoardDAO.selectOnePasswd(boardDTO.getBoardId());
+		 * 
+		 * boolean isValid = bCryptPasswordEncoder.matches(boardDTO.getPasswd(),encodedPassword);
+		 * 
+		 * if (isValid) {
+		 * 		boardDAO.deleteBoard(boardDTO);
+		 * 		isDelete = true;
+		 * }
+		 * 
+		 */
+		
+		if (bCryptPasswordEncoder.matches(boardDTO.getPasswd(), boardDAO.selectOnePasswd(boardDTO.getBoardId()))) {
+			boardDAO.deleteBoard(boardDTO.getBoardId());
+			isDelete = true;
+		}
+		
+		return isDelete;
+	}
+
 }
