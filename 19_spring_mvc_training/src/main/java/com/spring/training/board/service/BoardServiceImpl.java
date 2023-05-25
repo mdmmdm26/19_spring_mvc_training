@@ -55,7 +55,7 @@ public class BoardServiceImpl implements BoardService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
-	public void addBoard(BoardDTO boardDTO) {
+	public void addBoard(BoardDTO boardDTO) throws Exception{
 		
 		boardDTO.setPasswd(bCryptPasswordEncoder.encode(boardDTO.getPasswd()));
 		boardDAO.insertBoard(boardDTO); 
@@ -63,13 +63,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardDTO> getBoardList() {
+	public List<BoardDTO> getBoardList() throws Exception {
 		List<BoardDTO> boardList = boardDAO.selectListBoard();
 		return boardList;
 	}
 
 	@Override
-	public BoardDTO getBoardDetail(long boardId, boolean isUpdateReadCnt) {
+	public BoardDTO getBoardDetail(long boardId, boolean isUpdateReadCnt) throws Exception {
 		
 		if (isUpdateReadCnt) {
 			boardDAO.updateReadCnt(boardId);
@@ -80,7 +80,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public boolean modifyBoard(BoardDTO boardDTO) {
+	public boolean modifyBoard(BoardDTO boardDTO) throws Exception {
 		
 		boolean isUpdate = false;
 		
@@ -93,7 +93,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public boolean removeBoard(BoardDTO boardDTO) {
+	public boolean removeBoard(BoardDTO boardDTO) throws Exception {
 		
 		boolean isDelete = false;
 		
