@@ -41,7 +41,7 @@
 		FROM
 				MEMBER
 		WHERE
-				MEMBER_ID = #{memberID}
+				MEMBER_ID = #{memberId}
 	</select>
 	
 	<select id="selectListMember" resultType="MemberDTO">
