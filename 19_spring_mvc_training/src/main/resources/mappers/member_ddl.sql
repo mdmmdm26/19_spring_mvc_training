@@ -21,3 +21,5 @@ CREATE TABLE MEMBER (
 	ETC 			VARCHAR(3000)
 );
 
+select * from member;
+
